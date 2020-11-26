@@ -33,7 +33,7 @@ public class AthorizationServiceConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		// TODO Auto-generated method stub
-		clients.inMemory().withClient("etesech")
+		clients.inMemory().withClient("aea")
 		.secret(passwordEncoder.encode("123"))
 		.scopes("red", "write")
 		.authorizedGrantTypes("password","refresh_token")
