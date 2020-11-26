@@ -25,7 +25,7 @@ public class RolController {
 private RolService rolService;
 
 @GetMapping("/all")
-public List<Map<String, Object>> readAll(){
+public Map<String, Object> readAll(){
 	return rolService.readAll();
 }
 @GetMapping("/{id}")

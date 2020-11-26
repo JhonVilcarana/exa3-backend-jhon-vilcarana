@@ -25,11 +25,7 @@ private JdbcTemplate jdbcTemplate;
 	}
 	@Override
 	public Map<String, Object> datosUsuario(String username) {
-		String SQL = "SELECT u.idusuario, r.idrol, p.nombres, u.username FROM personas p " + 
-				"INNER JOIN usuarios u ON u.idpersona = p.idpersona " + 
-				"INNER JOIN usuarios_roles ur ON u.idusuario = ur.idusuario " + 
-				"INNER JOIN roles r ON r.idrol=ur.idrol "+
-				"where u.username = ?";
+		String SQL = "SELECT u.idusuario, r.idrol, p.nombres, u.username FROM persona p  JOIN usuarios u ON u.idpersona = p.idpersona  JOIN usuario_roles ur ON u.idusuario = ur.idusuario  JOIN roles r ON r.idrol=ur.idrol where u.username = ?";
 		Map<String, Object> map= jdbcTemplate.queryForMap(SQL, username);
 		return map;
 	}

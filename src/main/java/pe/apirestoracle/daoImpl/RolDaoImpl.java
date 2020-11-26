@@ -45,15 +45,13 @@ Gson gson =new Gson();
 	}
 
 @Override
-public List<Map<String, Object>> readAll() {
-	List<Map<String,Object>> lista = new ArrayList<>();
+public Map<String, Object> readAll() {
 	simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
 			.withCatalogName("pk_roles") //nombre del paquete
 			.withProcedureName("sp_listar_roles") //nombre del procedimiento
 			.declareParameters(new SqlOutParameter("cursor_roles", OracleTypes.REF_CURSOR, new ColumnMapRowMapper()));	
 			Map<String, Object> map = simpleJdbcCall.execute();
-			lista.add(map);
-	return lista;
+	return map;
 }
 
 @Override
@@ -97,7 +95,7 @@ public List<GrantedAuthority> buscarRolUser(int iduser) {
 
 	List<GrantedAuthority> autores = new ArrayList<GrantedAuthority>();
 	String SQL = "SELECT r.idrol, r.nombre FROM usuarios u " + 
-			"INNER JOIN usuarios_roles ur ON u.idusuario=ur.idusuario " + 
+			"INNER JOIN usuario_roles ur ON u.idusuario=ur.idusuario " + 
 			"INNER JOIN roles r ON r.idrol=ur.idrol " + 
 			"WHERE u.idusuario = ?";
 	List<Rol> roles = jdbcTemplate.query(SQL, new Object[]{iduser}, new BeanPropertyRowMapper<Rol>(Rol.class));		
